@@ -21,14 +21,23 @@
 
   </div>
 
-  <div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="row row-cols-1 row-cols-md-2 g-4">
     <div class="col-md-4" *ngFor="let hotel of hotels">
-      <div class="card h-100">
-        <img src="{{hotel.imageUrl}}"  [title]="hotel.hotelName" class="img-responsive" [alt]="hotel.hotelName" style="width: 100%" height="auto">
+      <div class="card">
+        <img
+          [src]="hotel.imageUrl"
+          [title]="hotel.hotelName | uppercase"
+          class="card-img-top"
+          [alt]="hotel.hotelName"
+          style="width: 100%" height="auto"
+        />
         <div class="card-body">
           <h5 class="card-title">{{hotel.hotelName}}</h5>
           <p class="card-text">
             {{hotel.description}}
+          </p>
+          <p class="card-text">
+            {{hotel.price | currency : 'EUR' : 'symbol'}}
           </p>
           <span class="badge badge-pill badge-info" *ngIf="showBadge">Nouveau</span>
         </div>
