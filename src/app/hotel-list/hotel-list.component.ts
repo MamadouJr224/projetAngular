@@ -41,7 +41,7 @@ export class HotelListComponent{
       "rating": 2.0
     }
   ];
-  public showBadge: boolean | undefined ;
+  public showBadge: boolean | undefined;
   public hotelFilter = 'mot';
 
   public toggleIsNewBadge(): void {
