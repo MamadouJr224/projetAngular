@@ -7,7 +7,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Étape de récupération du code source depuis un référentiel Git
-                git 'https://github.com/mamadoucire/angular.git'
+                git 'https://github.com/mamadoucire/projetAngular.git'
             }
         }
 
@@ -51,8 +51,9 @@ pipeline {
       stage('Build') {
             steps {
                 // Étape de construction de votre projet PHP (par exemple, exécution de tests, génération de fichiers, etc.)
+                  bat 'npm install -g @angular/cli'
                   bat 'ng build --configuration'
-               // bat 'npm install -g @angular/cli'
+                 
                // bat 'ng new test'
                // bat 'cd test'
                // bat 'ng serve'
