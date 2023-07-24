@@ -10,7 +10,7 @@ pipeline {
                 git 'https://github.com/mamadoucire/projetAngular.git'
             }
         }
-
+    }
      /*   stage('Install Dependencies') {
             steps {
                 // Étape d'installation de Composer
@@ -25,8 +25,8 @@ pipeline {
             }
         }*/
 
-        stages {
-        stage('Mise à jour de la version') {
+    
+    stage('Mise à jour de la version') {
             steps {
                 script {
                     def VERSION_INCREMENT_SCRIPT = '''
@@ -58,7 +58,7 @@ pipeline {
                     sh "npm version ${newVersion}"
                 }
             }
-        }
+    }
       /*  stage('Installation de angular cli et node js'){
             steps{
                 // Installation de Node.js v16.20.0
@@ -82,7 +82,7 @@ pipeline {
             }
         }*/
 
-      stage('Build') {
+    stage('Build') {
             steps {
                 // Étape de construction de votre projet PHP (par exemple, exécution de tests, génération de fichiers, etc.)
                   bat 'npm install '
@@ -93,7 +93,7 @@ pipeline {
                 //  bat 'ng serve'
                  // bat 'php build.php'
             }
-        }
+    }
 
       /*  stage('Deploy') {
             steps {
@@ -102,5 +102,5 @@ pipeline {
                 // ou utilisez d'autres commandes spécifiques à votre processus de déploiement
             }
         }*/
-    }
+    
 }
