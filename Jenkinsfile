@@ -24,39 +24,39 @@ pipeline {
                 bat 'php composer.phar install'
             }
         }*/
-        environment {
-        VERSION_INCREMENT_SCRIPT = '''
-        def incrementVersion(version) {
-            def parts = version.split('.')
-            def major = parts[0] as Integer
-            def minor = parts[1] as Integer
-            def patch = parts[2] as Integer
 
-            if (major == 0) {
-                // En pre-release, incrémente la version mineure
-                minor++
-            } else if (major == 1) {
-                // WP1, incrémente la version mineure
-                minor++
-                patch = 0
-            } else if (major == 2) {
-                // WP2, incrémente la version mineure
-                minor++
-                patch = 0
-            }
-
-            return "${major}.${minor}.${patch}"
-        }
-        '''
-        }
-
+        stages {
         stage('Mise à jour de la version') {
             steps {
-               script {
-                 def currentVersion = sh(script: "node -p \"require('./package.json').version\"", returnStdout: true).trim()
-                 def newVersion = incrementVersion(currentVersion)
-                 sh "npm version ${newVersion}"
-               }
+                script {
+                    def VERSION_INCREMENT_SCRIPT = '''
+                        def incrementVersion(version) {
+                            def parts = version.split('.')
+                            def major = parts[0] as Integer
+                            def minor = parts[1] as Integer
+                            def patch = parts[2] as Integer
+
+                            if (major == 0) {
+                                // En pre-release, incrémente la version mineure
+                                minor++
+                            } else if (major == 1) {
+                                // WP1, incrémente la version mineure
+                                minor++
+                                patch = 0
+                            } else if (major == 2) {
+                                // WP2, incrémente la version mineure
+                                minor++
+                                patch = 0
+                            }
+
+                            return "${major}.${minor}.${patch}"
+                        }
+                    '''
+
+                    def currentVersion = sh(script: "node -p \"require('./package.json').version\"", returnStdout: true).trim()
+                    def newVersion = sh(script: "${VERSION_INCREMENT_SCRIPT}\nincrementVersion('${currentVersion}')", returnStdout: true).trim()
+                    sh "npm version ${newVersion}"
+                }
             }
         }
       /*  stage('Installation de angular cli et node js'){
