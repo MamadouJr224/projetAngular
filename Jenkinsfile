@@ -46,7 +46,12 @@ pipeline {
             }
         }*/
 
-    
+        stage('Vérification de Node.js et npm') {
+            steps {
+               bat 'node -v'
+               bat 'npm -v'
+            }
+        }
         stage('Mise à jour de la version') {
             steps {
                script {
