@@ -68,7 +68,7 @@ pipeline {
                 bat 'npm version 1.1.3'
                 bat "git add package.json"
                 bat 'git commit -m "Mise a jour de la version"'
-                bat "git status"
+                bat "git status" 
                 bat "git push origin master"
             }
         }
