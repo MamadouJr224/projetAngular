@@ -77,7 +77,7 @@ pipeline {
                 }
             }
         }
-        stage('Mise à jour de la version') {
+      /*  stage('Mise à jour de la version') {
             steps {
                script {
                     def currentVersion = bat(script: "node -p \"require('./package.json').version\"", returnStdout: true).trim()
@@ -88,7 +88,7 @@ pipeline {
                     bat "npm version ${newVersion}"
                 }
             }
-        }
+        }*/
       /*  stage('Installation de angular cli et node js'){
             steps{
                 // Installation de Node.js v16.20.0
