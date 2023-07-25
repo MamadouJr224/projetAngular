@@ -50,6 +50,7 @@ pipeline {
         stage('Mise à jour de la version') {
             steps {
                script {
+                    bat 'npm install '
                     def currentVersion = bat(script: "node -p \"require('./package.json').version\"", returnStdout: true).trim()
                     def newVersion = incrementVersion(currentVersion)
                     bat "npm version ${newVersion}"
@@ -82,7 +83,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Étape de construction de votre projet PHP (par exemple, exécution de tests, génération de fichiers, etc.)
-                  bat 'npm install '
+                  
                   bat 'ng build --configuration'
                  
                 //  bat 'ng new test'
