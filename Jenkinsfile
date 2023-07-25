@@ -50,8 +50,10 @@ pipeline {
         stage('Mise à jour de la version') {
             steps {
                script {
-                    bat 'npm install '
                     def currentVersion = bat(script: "node -p \"require('./package.json').version\"", returnStdout: true).trim()
+                    if (currentVersion.isEmpty()) {
+                        error "La version récupérée depuis package.json est vide."
+                    }
                     def newVersion = incrementVersion(currentVersion)
                     bat "npm version ${newVersion}"
                 }
