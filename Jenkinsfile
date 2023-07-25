@@ -28,33 +28,31 @@ pipeline {
     
         stage('Mise à jour de la version') {
             steps {
-                script {
-                    def VERSION_INCREMENT_SCRIPT = '''
-                        def incrementVersion(version) {
-                            def parts = version.split('.')
-                            def major = parts[0] as Integer
-                            def minor = parts[1] as Integer
-                            def patch = parts[2] as Integer
+               script {
+                    def incrementVersion(version) {
+                        def parts = version.split('.')
+                        def major = parts[0] as Integer
+                        def minor = parts[1] as Integer
+                        def patch = parts[2] as Integer
 
-                            if (major == 0) {
-                                // En pre-release, incrémente la version mineure
-                                minor++
-                            } else if (major == 1) {
-                                // WP1, incrémente la version mineure
-                                minor++
-                                patch = 0
-                            } else if (major == 2) {
-                                // WP2, incrémente la version mineure
-                                minor++
-                                patch = 0
-                            }
-
-                            return "${major}.${minor}.${patch}"
+                        if (major == 0) {
+                            // En pre-release, incrémente la version mineure
+                            minor++
+                        } else if (major == 1) {
+                            // WP1, incrémente la version mineure
+                            minor++
+                            patch = 0
+                        } else if (major == 2) {
+                            // WP2, incrémente la version mineure
+                            minor++
+                            patch = 0
                         }
-                    '''
+
+                        return "${major}.${minor}.${patch}"
+                    }
 
                     def currentVersion = bat(script: "node -p \"require('./package.json').version\"", returnStdout: true).trim()
-                    def newVersion = bat(script: "${VERSION_INCREMENT_SCRIPT}\nincrementVersion('${currentVersion}')", returnStdout: true).trim()
+                    def newVersion = incrementVersion(currentVersion)
                     bat "npm version ${newVersion}"
                 }
             }
