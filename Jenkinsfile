@@ -51,6 +51,26 @@ pipeline {
                bat 'node -v'
                bat 'npm -v'
             }
+        stage('Vérification de package.json') {
+            steps {
+                // Affiche le contenu du fichier package.json pour le vérifier
+                bat 'type package.json'
+            }
+        }
+        stage('Mise à jour de la version initiale') {
+            steps {
+                // Modifie la version initiale dans package.json (par exemple, pour une première version majeure)
+                bat 'npm version 1.0.0'
+            }
+        }
+        stage('Récupération de la version') {
+            steps {
+                // Récupère la version depuis package.json
+                script {
+                    def currentVersion = bat(script: "node -p \"require('./package.json').version\"", returnStdout: true).trim()
+                    echo "Version récupérée depuis package.json: ${currentVersion}"
+                }
+            }
         }
         stage('Mise à jour de la version') {
             steps {
