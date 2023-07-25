@@ -53,9 +53,9 @@ pipeline {
                         }
                     '''
 
-                    def currentVersion = sh(script: "node -p \"require('./package.json').version\"", returnStdout: true).trim()
-                    def newVersion = sh(script: "${VERSION_INCREMENT_SCRIPT}\nincrementVersion('${currentVersion}')", returnStdout: true).trim()
-                    sh "npm version ${newVersion}"
+                    def currentVersion = bat(script: "node -p \"require('./package.json').version\"", returnStdout: true).trim()
+                    def newVersion = bat(script: "${VERSION_INCREMENT_SCRIPT}\nincrementVersion('${currentVersion}')", returnStdout: true).trim()
+                    bat "npm version ${newVersion}"
                 }
             }
         }
