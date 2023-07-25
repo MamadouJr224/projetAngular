@@ -52,7 +52,7 @@ pipeline {
                script {
                     def currentVersion = bat(script: "node -p \"require('./package.json').version\"", returnStdout: true).trim()
                     def newVersion = incrementVersion(currentVersion)
-                    bat "npm version ${newVersion}"
+                    bat "npm -v ${newVersion}"
                 }
             }
         }
