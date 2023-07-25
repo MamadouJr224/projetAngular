@@ -1,4 +1,7 @@
 def incrementVersion(version) {
+    // Vérifier si la version est vide, si oui, utiliser une version par défaut (par exemple, 1.0.0)
+    version = version ?: "1.0.0"
+
     def parts = version.split('.')
     def major = parts[0] as Integer
     def minor = parts[1] as Integer
@@ -19,6 +22,7 @@ def incrementVersion(version) {
 
     return "${major}.${minor}.${patch}"
 }
+
 pipeline {
     agent {
     label 'windows'
