@@ -55,6 +55,7 @@ pipeline {
                bat 'node -v'
                bat 'npm -v'
             }
+        }
         stage('Vérification de package.json') {
             steps {
                 // Affiche le contenu du fichier package.json pour le vérifier
