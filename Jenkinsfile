@@ -65,7 +65,7 @@ pipeline {
         stage('Mise à jour de la version initiale') {
             steps {
                 // Modifie la version initiale dans package.json (par exemple, pour une première version majeure)
-                bat 'npm version 1.1.2'
+                bat 'npm version 1.1.3'
                 bat "git add package.json"
                 bat 'git commit -m "Mise a jour de la version"'
                 bat "git status"
