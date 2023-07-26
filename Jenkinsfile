@@ -90,9 +90,11 @@ pipeline {
         }
         stage('Déploiement') {
             steps {
-                bat 'xcopy /E /I /Y dist\* ..\..\..\..\..\..\..\..\inetpub\wwwroot\'
+            // Copie des fichiers depuis le dossier "dist" vers un autre répertoire (par exemple, "..\\..\\..\\..\\..\\..\\..\\..\\inetpub\\wwwroot\\")
+                bat 'xcopy /E /I /Y dist\\* ..\\..\\..\\..\\..\\..\\..\\..\\inetpub\\wwwroot\\'
             }
         }
+
         stage('Nettoyage') {
             steps {
                 bat 'rmdir /S /Q node_modules'
