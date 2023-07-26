@@ -63,13 +63,13 @@ pipeline {
                 bat 'type package.json'
             }
         }
-        /*stage('Mise à jour de la version initiale') {
+        *stage('Mise à jour de la version initiale') {
             steps {
                 // Mise à jour de la version initiale
 
-                bat 'npm version 1.1.4'
+                bat 'npm version 1.1.5'
             }
-        } */  
+        }  
         stage('Recuperation de la version '){
             steps{
                 bat 'git tag'
