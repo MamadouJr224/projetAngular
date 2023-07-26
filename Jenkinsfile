@@ -79,7 +79,7 @@ pipeline {
             steps{
                 
                 bat 'git add package.json'
-                bat 'git commit -m "chore: bump version"'
+                bat 'git commit -m "chore: bump version" --untracked-files=no'
                 bat 'git push origin master'
                 bat 'git push origin --tags'
             }
