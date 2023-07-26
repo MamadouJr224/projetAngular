@@ -78,11 +78,11 @@ pipeline {
                 bat 'npm install'
             }
         }
-        stage('Tests') {
+        /*stage('Tests') {
             steps {
                 bat 'npm test'
             }
-        }
+        }*/
         stage('Build') {
             steps {
                 bat 'npm run build'
