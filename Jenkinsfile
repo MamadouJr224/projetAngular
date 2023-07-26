@@ -1,6 +1,6 @@
 def incrementVersion(version) {
     // Vérifier si la version est vide, si oui, utiliser une version par défaut (par exemple, 1.0.0)
-    version = version ?: "1.0.0"
+    version = version ?: "0.0.0"
 
     def parts = version.split('.')
     def major = parts[0] as Integer
