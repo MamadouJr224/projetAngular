@@ -68,11 +68,11 @@ pipeline {
                 bat 'type package-lock.json'
             }
         }
-        stage('Mise à jour de la version initiale') {
+       /* stage('Mise à jour de la version initiale') {
            steps {
               bat 'npm version minor'
            }
-       }
+       }*/
        stage('Installation des dépendances') {
             steps {
                 bat 'npm install'
