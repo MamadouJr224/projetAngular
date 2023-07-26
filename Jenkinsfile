@@ -73,7 +73,6 @@ pipeline {
         stage('Recuperation de la version '){
             steps{
                 bat 'git tag'
-                bat 'git describe --tags'
             }
         }
         stage('push version et tag'){
