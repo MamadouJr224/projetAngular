@@ -171,5 +171,10 @@ pipeline {
                 // ou utilisez d'autres commandes spécifiques à votre processus de déploiement
             }
         }*/
+        stage('fin pipeline') {
+            steps {
+                echo 'fin du pipeline'
+            }
+        }
     }
 }
