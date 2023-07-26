@@ -36,7 +36,8 @@ pipeline {
             }
         }
     
-     /*   stage('Install Dependencies') {
+
+         /*   stage('Install Dependencies') {
             steps {
                 // Étape d'installation de Composer
                 bat 'php --version'
@@ -72,13 +73,10 @@ pipeline {
                 bat "git push origin master"
             }
         }
-        stage('Récupération de la version') {
-            steps {
-                // Récupère la version depuis package.json
-                script {
-                    def currentVersion = bat(script: "node -p \"require('./package.json').version\"", returnStdout: true).trim()
-                    echo "Version récupérée depuis package.json: ${currentVersion}"
-                }
+        stage('Recuperation de la version '){
+            steps{
+                bat 'git tag'
+                bat 'git describe --tags'
             }
         }
       /*  stage('Mise à jour de la version') {
