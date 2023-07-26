@@ -90,7 +90,7 @@ pipeline {
         }
         stage('Déploiement') {
             steps {
-                bat '"xcopy /E /I /Y dist\* ..\..\..\..\..\..\..\..\inetpub\wwwroot\"'
+                bat 'xcopy /E /I /Y dist\* ..\..\..\..\..\..\..\..\inetpub\wwwroot\'
             }
         }
         stage('Nettoyage') {
