@@ -66,8 +66,8 @@ pipeline {
         stage('Mise à jour de la version initiale') {
             steps {
                 // Mise à jour de la version initiale
-                
-                bat 'npm version 1.0.0'
+
+                bat 'npm version 1.1.4'
             }
         }   
         stage('Recuperation de la version '){
