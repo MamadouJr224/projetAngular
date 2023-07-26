@@ -63,17 +63,26 @@ pipeline {
                 bat 'type package.json'
             }
         }
-        stage('Mise à jour de la version initiale') {
+        /*stage('Mise à jour de la version initiale') {
             steps {
                 // Mise à jour de la version initiale
 
                 bat 'npm version 1.1.4'
             }
-        }   
+        } */  
         stage('Recuperation de la version '){
             steps{
                 bat 'git tag'
                 bat 'git describe --tags'
+            }
+        }
+        stage('push version et tag'){
+            steps{
+                
+                bat 'git add package.json'
+                bat 'git commit -m "chore: bump version"'
+                bat 'git push origin master'
+                bat 'git push origin --tags'
             }
         }
       /*  stage('Mise à jour de la version') {
