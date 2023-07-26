@@ -67,7 +67,7 @@ pipeline {
            steps {
               bat 'npm version minor'
               bat 'git add package.json'
-              bat 'git commit -m "chore: bump version" --untracked-files=no'
+              bat 'git commit -m "chore: bump version"'
               bat 'git push origin master'
            }
        }
