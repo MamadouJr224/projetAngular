@@ -6,8 +6,8 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        AppComponent
-        HotelListComponent // Assurez-vous d'ajouter le composant ici
+        AppComponent,
+        HotelListComponent, // Assurez-vous d'ajouter le composant ici
       ],
     }).compileComponents();
   });
