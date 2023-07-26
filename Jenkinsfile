@@ -64,25 +64,15 @@ pipeline {
             }
         }
         stage('Mise à jour de la version initiale') {
-            steps {
-                bat 'npm version 1.1.5'
-            }
-        }  
-        stage('Recuperation de la version '){
-            steps{
-                bat 'git tag'
-            }
-        }
-        stage('push version et tag'){
-            steps{
-                
-                bat 'git add package.json'
-                bat 'git status'
-                bat 'git commit -m "chore: bump version" --untracked-files=no'
-                bat 'git push origin master'
-                bat 'git push origin --tags'
-            }
-        }
+           steps {
+              bat 'npm version 1.1.5'
+              bat 'git add package.json'
+              bat 'git commit -m "chore: bump version" --untracked-files=no'
+              bat 'git push origin master'
+           }
+       }
+        
+        
       /*  stage('Mise à jour de la version') {
             steps {
                script {
