@@ -63,7 +63,7 @@ pipeline {
                 bat 'type package.json'
             }
         }
-        *stage('Mise à jour de la version initiale') {
+        stage('Mise à jour de la version initiale') {
             steps {
                 bat 'npm version 1.1.5'
             }
