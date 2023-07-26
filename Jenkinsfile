@@ -102,20 +102,7 @@ pipeline {
             }
         }
 
-        stage('Tag de la version déployée') {
-            steps {
-                script {
-                    def currentVersion = bat(script: "node -p \"require('./package.json').version\"", returnStdout: true).trim()
-                    if (currentVersion.isEmpty()) {
-                        error "La version récupérée depuis package.json est vide."
-                    }
-                    def newVersion = incrementVersion(currentVersion)
-                    bat "git tag -a v${newVersion} -m \"Recette 17/03\""
-                    bat "git push origin --tags"
-                }
-            }
-        }
-
+    
         
         
       /*  stage('Mise à jour de la version') {
