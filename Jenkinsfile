@@ -65,7 +65,7 @@ pipeline {
         }
         stage('Mise à jour de la version initiale') {
            steps {
-              bat 'npm version 1.1.5'
+              bat 'npm version 1.1.6'
               bat 'git add package.json'
               bat 'git commit -m "chore: bump version" --untracked-files=no'
               bat 'git push origin master'
