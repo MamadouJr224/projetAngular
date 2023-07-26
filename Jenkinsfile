@@ -1,6 +1,6 @@
 def incrementVersion(version) {
     // Vérifier si la version est vide, si oui, utiliser une version par défaut (par exemple, 1.0.0)
-    version = version ?: "0.0.0"
+    version = version ?: "1.0.0"
 
     def parts = version.split('.')
     def major = parts[0] as Integer
@@ -22,7 +22,6 @@ def incrementVersion(version) {
 
     return "${major}.${minor}.${patch}"
 }
-
 pipeline {
     agent {
     label 'windows'
@@ -63,14 +62,58 @@ pipeline {
                 bat 'type package.json'
             }
         }
+        stage('Vérification de package-lock.json') {
+            steps {
+                // Affiche le contenu du fichier package-lock.json pour le vérifier
+                bat 'type package-lock.json'
+            }
+        }
         stage('Mise à jour de la version initiale') {
            steps {
               bat 'npm version minor'
-              bat 'git add package.json'
-              bat 'git commit -m "chore: bump version"'
-              bat 'git push origin master'
            }
        }
+       stage('Installation des dépendances') {
+            steps {
+                bat 'npm install'
+            }
+        }
+        stage('Tests') {
+            steps {
+                bat 'npm test'
+            }
+        }
+        stage('Build') {
+            steps {
+                bat 'npm run build'
+            }
+        }
+        stage('Déploiement') {
+            steps {
+                bat 'xcopy /E /I /Y dist\* ..\..\..\..\..\..\..\..\inetpub\wwwroot\''
+            }
+        }
+        stage('Nettoyage') {
+            steps {
+                bat 'rmdir /S /Q node_modules'
+                bat 'del package-lock.json'
+            }
+        }
+
+        stage('Tag de la version déployée') {
+            steps {
+                script {
+                    def currentVersion = bat(script: "node -p \"require('./package.json').version\"", returnStdout: true).trim()
+                    if (currentVersion.isEmpty()) {
+                        error "La version récupérée depuis package.json est vide."
+                    }
+                    def newVersion = incrementVersion(currentVersion)
+                    bat "git tag -a v${newVersion} -m \"Recette 17/03\""
+                    bat "git push origin --tags"
+                }
+            }
+        }
+
         
         
       /*  stage('Mise à jour de la version') {
@@ -108,7 +151,7 @@ pipeline {
             }
         }*/
 
-        stage('Build') {
+      /*  stage('Build') {
             steps {
                 // Étape de construction de votre projet PHP (par exemple, exécution de tests, génération de fichiers, etc.)
                   
@@ -119,7 +162,7 @@ pipeline {
                 //  bat 'ng serve'
                  // bat 'php build.php'
             }
-        }
+        }*/
 
       /*  stage('Deploy') {
             steps {
