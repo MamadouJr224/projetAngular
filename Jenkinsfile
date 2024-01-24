@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+      label 'alma_slave'
+    }
 
     stages {
         stage('Vérification de package.json') {
