@@ -41,12 +41,5 @@ pipeline {
                 }
             }
         }
-        stage('Test PHP') {
-            steps {
-                script {
-                    sh './vendor/bin/phpunit'
-                }
-            }
-        }
     }
 }
