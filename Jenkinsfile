@@ -4,46 +4,46 @@ pipeline {
     stages {
         stage('Vérification de package.json') {
             steps {
-              script {
-                // Affiche le contenu du fichier package.json pour le vérifier
-                sh 'type package.json'
-              }
+                script {
+                    // Affiche le contenu du fichier package.json pour le vérifier
+                    sh 'cat package.json'
+                }
             }
         }
         stage('Vérification de package-lock.json') {
             steps {
-              script {
-                // Affiche le contenu du fichier package-lock.json pour le vérifier
-                sh 'type package-lock.json'
-              }
+                script {
+                    // Affiche le contenu du fichier package-lock.json pour le vérifier
+                    sh 'cat package-lock.json'
+                }
             }
         }
-       stage('Installation des dépendances') {
+        stage('Installation des dépendances') {
             steps {
-              script {
-                sh 'npm install'
-              }
+                script {
+                    sh 'npm install'
+                }
             }
         }
         stage('Tests') {
             steps {
-              {
-                bat 'npm test'
-              }
+                script {
+                    sh 'npm test'
+                }
             }
         }
         stage('Build') {
             steps {
-              script {
-                bat 'npm run build'
-              }
+                script {
+                    sh 'npm run build'
+                }
             }
         }
-        stage('Test') {
+        stage('Test PHP') {
             steps {
-              script {
-                sh './vendor/bin/phpunit'
-              }
+                script {
+                    sh './vendor/bin/phpunit'
+                }
             }
         }
     }
